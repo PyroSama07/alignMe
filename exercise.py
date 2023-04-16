@@ -72,6 +72,7 @@ def push_ups(results,counter,stage):
     knee = [landmarks[mp_pose.PoseLandmark.RIGHT_KNEE.value].x,
             landmarks[mp_pose.PoseLandmark.RIGHT_KNEE.value].y,
             landmarks[mp_pose.PoseLandmark.RIGHT_KNEE.value].z]
+    
     # Calculate angle
     angle = calculate_angle(shoulder, elbow, wrist)
     temp_angle = calculate_angle(shoulder,hip,knee)
