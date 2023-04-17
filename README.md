@@ -1,2 +1,11 @@
-#alignMe
-#please
+AlignMe is a posture tracking system that utilizes computer vision technology to monitor the movement of joints during exercise routines. The system is designed to ensure correct posture and reduce the risk of injury. 
+
+Incorrect posture is a common cause of injuries during exercise. Poor alignment places undue stress on joints, ligaments, and muscles, leading to discomfort, pain, and even long-term damage. AlignMe aims to address this problem by providing real-time feedback to users, helping them correct their form and maintain proper alignment. 
+
+The system uses a camera to capture the user's movements during exercise, which are then analysed by the computer vision algorithm. The algorithm identifies the position of the user's joints and tracks their movement throughout the exercise routine. The system then provides feedback to the user, indicating whether their form is correct or incorrect. 
+
+AlignMe is particularly useful for individuals who are new to exercise or those who are recovering from an injury. It can help them learn proper form and develop good habits from the outset, reducing the risk of future injury. 
+
+AlignMe in its starting period can be easily implemented in local gyms where there is a shortage of trained gym trainers and the customer to gym trainer ratio is very high. AlignMe can easily take the load of the trainers and help individuals maintain correct posture and perform their exercises more efficiently. This can also be a cheap alternative to expensive personal trainers by replacing them with AlignMe with a little supervision from your normal gym trainers. The benefits of AlignMe extend beyond injury prevention. By ensuring correct posture, users can engage the correct muscles during their exercises, leading to better results and improved performance. Additionally, AlignMe can be used to track progress over time, allowing users to see how their form improves as they become more experienced. 
+
+In conclusion, AlignMe is a valuable tool for anyone looking to improve their exercise routine. By tracking joint movements and providing real-time feedback, the system can help users maintain proper alignment, reduce the risk of injury, and achieve better results.
