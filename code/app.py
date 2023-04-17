@@ -22,4 +22,4 @@ async def stream_exercise(request: Exercise):
         print(e)
 
 if __name__ == "__main__":
-    uvicorn.run("app:app",reload = True)
+    uvicorn.run("app:app",reload = True,host="127.0.0.1",port=1300)
