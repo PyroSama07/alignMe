@@ -52,7 +52,7 @@ def start_camera(selected_exercise):
             if correct:
                 cv2.rectangle(image, (0,0), (225,73), (0,255,0), -1)
             else:
-                cv2.rectangle(image, (0,0), (225,73), (0,0,255), -1)  
+                cv2.rectangle(image, (0,0), (250,78), (0,0,255), -1)  
 
             # Rep data
             cv2.putText(image, 'REPS', (15,12), 
