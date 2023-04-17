@@ -8,7 +8,6 @@ mediapipe = "*"
 opencv-python = "*"
 numpy = "*"
 fastapi = {extras = ["all"], version = "*"}
-uvicorn = {extras = ["standard"], version = "*"}
 
 [dev-packages]
 
