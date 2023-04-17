@@ -49,7 +49,7 @@ def curl(results,counter,stage):
         return True,counter,stage
     return False,counter,"Wrong"
 
-def push_ups(results,counter,stage):
+def push_up(results,counter,stage):
     landmarks = results.pose_landmarks.landmark
 
     # Get coordinates

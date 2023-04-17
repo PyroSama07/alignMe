@@ -6,6 +6,10 @@ mp_drawing = mp.solutions.drawing_utils
 mp_pose = mp.solutions.pose
 
 def start_camera(selected_exercise):
+    try:
+        selected_exercise = getattr(exercise,selected_exercise)
+    except:
+        return 0
     cap = cv2.VideoCapture(0)
 
     # Curl counter variables
@@ -72,5 +76,8 @@ def start_camera(selected_exercise):
 
         cap.release()
         cv2.destroyAllWindows()
+        return counter
 
-start_camera(exercise.curl)
+
+if __name__ == "__main__":
+    start_camera(input("Enter Exercise: "))
