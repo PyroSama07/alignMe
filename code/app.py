@@ -5,9 +5,9 @@ import uvicorn
 
 app = FastAPI()
 
-# @app.get("/")
-# async def root():
-#     return {"message": "Hello World"}
+@app.get("/")
+async def root():
+    return {"message": "Hello World"}
 
 class Exercise(BaseModel):
     exercise_name: str

@@ -7,7 +7,8 @@ name = "pypi"
 mediapipe = "*"
 opencv-python = "*"
 numpy = "*"
-fastapi = {extras = ["all"], version = "*"}
+fastapi = "*"
+uvicorn = "*"
 
 [dev-packages]
 
