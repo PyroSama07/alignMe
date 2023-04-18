@@ -2,3 +2,6 @@
 *.ipynb_checkpoints
 .venv
 testing.ipynb
+test.sql
+*.env
+*sql*
