@@ -9,6 +9,8 @@ opencv-python = "*"
 numpy = "*"
 fastapi = "*"
 uvicorn = "*"
+oracledb = "*"
+python-dotenv = "*"
 
 [dev-packages]
 
