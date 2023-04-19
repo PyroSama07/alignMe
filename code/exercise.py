@@ -49,7 +49,7 @@ def bicep_curl(results,counter,stage):
         return True,counter,stage
     return False,counter,"Wrong"
 
-def bicep_curl(results,counter,stage):
+def tricep_pushdown(results,counter,stage):
     landmarks = results.pose_landmarks.landmark
 
     # Get coordinates
