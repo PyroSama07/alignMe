@@ -1,5 +1,4 @@
 {
     "docwriter.style": "Auto-detect",
-    "docwriter.progress.trackFunctions": false,
-    "python.pythonPath": "/usr/bin/python3"
+    "docwriter.progress.trackFunctions": false
 }
