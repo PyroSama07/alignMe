@@ -4,4 +4,5 @@
 testing.ipynb
 test.sql
 *.env
-*sql*
+*.sql
+.vscode

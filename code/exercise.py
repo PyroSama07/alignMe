@@ -16,7 +16,7 @@ def calculate_angle(a,b,c):
         
     return angle 
 
-def curl(results,counter,stage):
+def bicep_curl(results,counter,stage):
     landmarks = results.pose_landmarks.landmark
 
     # Get coordinates
@@ -45,6 +45,39 @@ def curl(results,counter,stage):
             stage = "down"
         if angle < 40 and stage =='down':
             stage="up"
+            counter +=1
+        return True,counter,stage
+    return False,counter,"Wrong"
+
+def tricep_pushdown(results,counter,stage):
+    landmarks = results.pose_landmarks.landmark
+
+    # Get coordinates
+    shoulder=[landmarks[mp_pose.PoseLandmark.LEFT_SHOULDER.value].x,
+              landmarks[mp_pose.PoseLandmark.LEFT_SHOULDER.value].y,
+              landmarks[mp_pose.PoseLandmark.LEFT_SHOULDER.value].z]
+    
+    elbow = [landmarks[mp_pose.PoseLandmark.LEFT_ELBOW.value].x,
+             landmarks[mp_pose.PoseLandmark.LEFT_ELBOW.value].y,
+             landmarks[mp_pose.PoseLandmark.LEFT_ELBOW.value].z]
+    
+    wrist = [landmarks[mp_pose.PoseLandmark.LEFT_WRIST.value].x,
+             landmarks[mp_pose.PoseLandmark.LEFT_WRIST.value].y,
+             landmarks[mp_pose.PoseLandmark.LEFT_WRIST.value].z]
+
+    hip = [landmarks[mp_pose.PoseLandmark.LEFT_HIP.value].x,
+           landmarks[mp_pose.PoseLandmark.LEFT_HIP.value].y,
+           landmarks[mp_pose.PoseLandmark.LEFT_HIP.value].z]
+
+    # Calculate angle
+    angle = calculate_angle(shoulder, elbow, wrist)
+    temp_angle = calculate_angle(shoulder,elbow,hip)
+        
+    if temp_angle >165:
+        if angle <40 :
+            stage = "up"
+        if angle > 140 and stage =='up':
+            stage="down"
             counter +=1
         return True,counter,stage
     return False,counter,"Wrong"

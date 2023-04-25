@@ -9,7 +9,7 @@ def start_camera(selected_exercise):
     try:
         selected_exercise = getattr(exercise,selected_exercise)
     except:
-        return 0
+        return -1
     cap = cv2.VideoCapture(0)
 
     # Curl counter variables
@@ -80,4 +80,5 @@ def start_camera(selected_exercise):
 
 
 if __name__ == "__main__":
-    start_camera(input("Enter Exercise: "))
+    a = start_camera(input("Enter Exercise: "))
+    print(a)
