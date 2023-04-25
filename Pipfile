@@ -7,11 +7,12 @@ name = "pypi"
 mediapipe = "*"
 opencv-python = "*"
 numpy = "*"
-fastapi = "*"
+fastapi = {extras = ["all"], version = "*"}
 uvicorn = "*"
 oracledb = "*"
 python-dotenv = "*"
 pandas = "*"
+cors = "*"
 
 [dev-packages]
 

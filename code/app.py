@@ -1,12 +1,15 @@
-from fastapi import FastAPI
+from fastapi import FastAPI,Request, Form
 from camera import start_camera
 from pydantic import BaseModel
 import uvicorn
-import getpass
 import oracledb
 from dotenv import load_dotenv
 import os
+import json
 import pandas as pd
+from fastapi.middleware.cors import CORSMiddleware
+from starlette.templating import Jinja2Templates
+templates = Jinja2Templates(directory="Frontend")
 
 
 load_dotenv()
@@ -25,9 +28,16 @@ connection,cursor = connect_db()
 
 app = FastAPI()
 
+origins = ["*"]
+app.add_middleware(CORSMiddleware,allow_origins = origins,
+                   allow_methods = ["*"],
+                   allow_credentials = True,
+                   allow_headers = ["*"])
+
 @app.get("/")
-async def root():
-    return {"message": "Hello World"}
+async def root(request:Request):
+    # return {"message": "Hello World"}
+    return templates.TemplateResponse("index.html",{"request":request})
 
 class Exercise(BaseModel):
     exercise_name: str
@@ -59,27 +69,28 @@ def valid_email(email,connection):
     else:
         return False
 
-@app.post("/register/")
-async def signup(request: SignUp):
-    if valid_email(request.email,connection):
+@app.post("/signup")
+async def signup(request: Request,name:str=Form(...),email:str=Form(...),password:str=Form(...),contact:int=Form(...)):
+    if valid_email(email,connection):
         try:
             cursor.execute("insert into users (email,name,password,contact) values ('{}','{}','{}','{}')".
-                    format(request.email,request.name,request.password,request.contact))
+                    format(email,name,password,contact))
             return {"Status",'Acoount Created'}
         except Exception as e:
             return {"Status","{}".format(e)}
     else:
         return{"Status","Email not valid or Already exists"}
 
-@app.post("/regiter/")
-async def login(request: LogIn):
-    query_pass = "SELECT password FROM users WHERE email = '{}'".format(request.email)
+@app.post("/login")
+async def login(request: Request,email:str=Form(...),password:str=Form(...)):
+
+    query_pass = "SELECT password FROM users WHERE email = '{}'".format(email)
     valid_email = pd.read_sql(query_pass,connection).shape[0]
     if valid_email:
-        query_pass = "SELECT password FROM users WHERE email = '{}'".format(request.email)
+        query_pass = "SELECT password FROM users WHERE email = '{}'".format(email)
         df = pd.read_sql(query_pass,connection)
         auth_pass = df.iloc[0][0]
-        if auth_pass == request.password:
+        if auth_pass == password:
             return {"Status","Access Granted"}
         else:
             return {"Status","Access Not Granted"}
