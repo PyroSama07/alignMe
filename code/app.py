@@ -54,7 +54,10 @@ async def stream_exercise(request: Exercise):
 def valid_email(email,connection):
     query = "select * from users where email = '{}'".format(email)
     atr = '@' in email
-    return pd.read_sql(query,connection).shape and atr
+    if pd.read_sql(query,connection).shape[0]==0:
+        return atr
+    else:
+        return False
 
 @app.post("/register/")
 async def signup(request: SignUp):
@@ -85,5 +88,4 @@ async def login(request: LogIn):
 
 
 if __name__ == "__main__":
-    # connection,cursor = connect_db()
     uvicorn.run("app:app",reload = True,host="127.0.0.1",port=1300)
