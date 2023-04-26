@@ -1,4 +1,4 @@
-from fastapi import FastAPI,Request, Form
+from fastapi import FastAPI,Request,Form
 from camera import start_camera
 from pydantic import BaseModel
 import uvicorn
@@ -7,6 +7,7 @@ from dotenv import load_dotenv
 import os
 import json
 import pandas as pd
+from starlette.responses import RedirectResponse
 from fastapi.middleware.cors import CORSMiddleware
 from starlette.templating import Jinja2Templates
 templates = Jinja2Templates(directory="Frontend")
@@ -36,11 +37,11 @@ app.add_middleware(CORSMiddleware,allow_origins = origins,
 
 @app.get("/")
 async def root(request:Request):
-    # return {"message": "Hello World"}
-    return templates.TemplateResponse("index.html",{"request":request})
+    return {"message": "Hello World"}
+    # return templates.TemplateResponse("index.html",{"request":request})
 
 class Exercise(BaseModel):
-    exercise_name: str
+    exercise_name: str=Form(...)
 
 class SignUp(BaseModel):
     email: str
@@ -52,10 +53,12 @@ class LogIn(BaseModel):
     email: str
     password: str
 
-@app.post("/")
-async def stream_exercise(request: Exercise):
+@app.post("/exercise")
+async def stream_exercise(req: Request,exercise_name:str=Form(...)):
+    # print(data)
+    # request=data.exercise_name
     try:
-        selected_exercise = request.exercise_name
+        selected_exercise = exercise_name
         obj = start_camera(selected_exercise)
         return {"count":obj}
     except Exception as e:
@@ -91,9 +94,13 @@ async def login(request: Request,email:str=Form(...),password:str=Form(...)):
         df = pd.read_sql(query_pass,connection)
         auth_pass = df.iloc[0][0]
         if auth_pass == password:
-            return {"Status","Access Granted"}
+            # return {"Status","Access Granted"}
+            return templates.TemplateResponse("randi.html",{"request":request})
+        
         else:
-            return {"Status","Access Not Granted"}
+            # return templates.TemplateResponse("index.html",{"request":request})
+            # return RedirectResponse(url="http://127.0.0.1:5500/")
+            return {"Status","Access Not Granted. Press back to return!"}
     else:
         return {"Status","E-Mail Doesnt Exist"}
 
