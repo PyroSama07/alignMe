@@ -10,7 +10,11 @@ import pandas as pd
 from starlette.responses import RedirectResponse
 from fastapi.middleware.cors import CORSMiddleware
 from starlette.templating import Jinja2Templates
+from starlette.staticfiles import StaticFiles
+
+
 templates = Jinja2Templates(directory="Frontend")
+
 
 
 load_dotenv()
@@ -28,6 +32,7 @@ def connect_db():
 connection,cursor = connect_db()
 
 app = FastAPI()
+app.mount("/static", StaticFiles(directory="Frontend/static", html = True), name="static")
 
 origins = ["*"]
 app.add_middleware(CORSMiddleware,allow_origins = origins,
@@ -95,7 +100,7 @@ async def login(request: Request,email:str=Form(...),password:str=Form(...)):
         auth_pass = df.iloc[0][0]
         if auth_pass == password:
             # return {"Status","Access Granted"}
-            return templates.TemplateResponse("randi.html",{"request":request})
+            return templates.TemplateResponse("exercise.html",{"request":request})
         
         else:
             # return templates.TemplateResponse("index.html",{"request":request})
