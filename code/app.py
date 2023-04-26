@@ -32,7 +32,7 @@ def connect_db():
 connection,cursor = connect_db()
 
 app = FastAPI()
-app.mount("/static", StaticFiles(directory="Frontend/static", html = True), name="static")
+app.mount("/static", StaticFiles(directory="static", html = True), name="static")
 
 origins = ["*"]
 app.add_middleware(CORSMiddleware,allow_origins = origins,
@@ -42,8 +42,13 @@ app.add_middleware(CORSMiddleware,allow_origins = origins,
 
 @app.get("/")
 async def root(request:Request):
-    return {"message": "Hello World"}
-    # return templates.TemplateResponse("index.html",{"request":request})
+    # return {"message": "Hello World"}
+    return templates.TemplateResponse("index.html",{"request":request})
+
+@app.get("/loginz")
+async def root(request:Request):
+    # return {"message": "Hello World"}
+    return templates.TemplateResponse("login.html",{"request":request})
 
 class Exercise(BaseModel):
     exercise_name: str=Form(...)

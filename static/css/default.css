@@ -7611,7 +7611,7 @@ body {
 
 .bg-hero {
   background-color: #000000;
-  background-image: url("static/media/bg.jpeg");
+  background-image: url("bg.jpeg");
   /* background by SVGBackgrounds.com */
   background-attachment: fixed;
   background-size: cover;
