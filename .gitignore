@@ -6,4 +6,4 @@ test.sql
 *.env
 *.sql
 .vscode
-randi.html
+.DS_Store
