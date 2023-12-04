@@ -30,7 +30,6 @@ Install the required packages for the project.
   cd alignMe
   pipenv shell
   pipenv install
-  cd code
-  python app.py
+  python3 code/app.py
 ```
 Navigate to http://localhost:1300.
