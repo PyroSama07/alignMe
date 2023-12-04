@@ -70,7 +70,7 @@ async def stream_exercise(req: Request,exercise_name:str=Form(...)):
     try:
         selected_exercise = exercise_name
         obj = start_camera(selected_exercise)
-        return templates.TemplateResponse("exercise.html",{"request":Request})
+        return templates.TemplateResponse("exercise.html",{"request":req})
         # return {"count":obj}
     except Exception as e:
         print(e)
